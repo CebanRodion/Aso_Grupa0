@@ -64,4 +64,33 @@ public class Client extends Thread{
             System.out.println(ex);
         }
     }
+    public int checkBarber(){
+        barberLock.lock();
+        try {
+            for(int i = 0; i < isBarberFree.length; i++){
+                if(isBarberFree[i]){
+                    isBarberFree[i] = false;
+                    return i;
+                }
+            }
+        } finally {
+            barberLock.unlock();
+        }
+        return NO_FREE_BARBER;
+    }
+
+    public int checkChair(){
+        chairLock.lock();
+        try {
+            for(int i = 0; i < isChairFree.length; i++){
+                if(isChairFree[i]){
+                    isChairFree[i] = false;
+                    return i;
+                }
+            }
+        } finally {
+            chairLock.unlock();
+        }
+        return NO_FREE_CHAIR;
+    }
 }
