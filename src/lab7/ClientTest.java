@@ -1,4 +1,4 @@
-package Lab7;
+package lab7;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,8 +19,8 @@ public class ClientTest {
     public void testCheckChair() {
         boolean[] isBarberFree = {true, true};
         boolean[] isChairFree = {true, true};
-        Laborator7.EndWorkDay end = new Laborator7.EndWorkDay();
-        Laborator7.Client client = new Laborator7.Client(isBarberFree, isChairFree, end);
+        EndWorkDay end = new EndWorkDay();
+        Client client = new Client(isBarberFree, isChairFree, end);
         int chairIndex = client.checkChair();
         assertTrue(chairIndex >= 0 && chairIndex < isChairFree.length);
     }
