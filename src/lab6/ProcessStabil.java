@@ -76,6 +76,24 @@ public class ProcessStabil implements Runnable {
         System.out.println("Process " + pid + " has completed.");
     }
 
+    public boolean tryAcquire(int[] request) {
+        boolean acquired = true;
+        for (int i = 0; i < NUM_RESOURCES; i++) {
+            if (request[i] > resources[i].availablePermits()) {
+                acquired = false;
+                System.out.println("Process " + pid + " could not acquire enough of resource " + i);
+                break;
+            }
+        }
+        if (acquired) {
+            for (int i = 0; i < NUM_RESOURCES; i++) {
+                resources[i].acquireUninterruptibly(request[i]);
+                //System.out.println("Process " + pid + " has acquired " + request[i] + " of resource " + i);
+            }
+            System.out.println("Process " + pid + " has acquired " + Arrays.toString(request) + " of resource");
+        }
+        return acquired;
+    }
 
     public boolean isSafe() {
         boolean[] finished = new boolean[NUM_PROCESSES];
